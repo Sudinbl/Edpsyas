@@ -1,5 +1,6 @@
 /* =========================================================
    CHATBOT INTERACTION SCRIPT (script.js)
+   Supports Small Talk + Knowledge Base (RAG)
    ========================================================= */
 
 // Your Cloudflare Worker URL
@@ -33,8 +34,6 @@ function initChatbot() {
             sendMessage();
         });
         console.log("Send button listener attached successfully.");
-    } else {
-        console.error("Send button element not found!");
     }
 }
 
@@ -59,6 +58,21 @@ async function loadKnowledge() {
     } catch (error) {
         console.error("Error loading knowledge.json:", error);
     }
+}
+
+/**
+ * Checks if the user message is casual greeting or small talk
+ */
+function isSmallTalk(query) {
+    const clean = query.toLowerCase().trim().replace(/[^\w\s]/g, "");
+    
+    const greetings = [
+        "hi", "hello", "hey", "greetings", "good morning", "good afternoon", 
+        "good evening", "howdy", "sup", "yo", "help", "who are you", 
+        "what can you do", "thanks", "thank you", "bye", "goodbye"
+    ];
+
+    return greetings.includes(clean) || clean.length <= 2;
 }
 
 /**
@@ -113,10 +127,9 @@ function searchKnowledge(query) {
 }
 
 /**
- * Sends the user message with Knowledge Base verification
+ * Sends the user message with Small Talk detection & Knowledge Base verification
  */
 async function sendMessage() {
-    console.log("sendMessage triggered!");
 
     const inputField = document.getElementById('userInput');
     if (!inputField) return;
@@ -129,28 +142,52 @@ async function sendMessage() {
     inputField.value = "";
     scrollToBottom();
 
-    // Verify knowledge base availability
-    if (!knowledge || knowledge.length === 0) {
-        renderBotMessage("⚠️ Knowledge base is still loading or could not be found. Please refresh the page.");
-        scrollToBottom();
-        return;
-    }
-
-    // Search knowledge base
-    const matchedItem = searchKnowledge(userText);
-
-    if (!matchedItem) {
-        renderBotMessage("Sorry, I couldn't find that topic in the EdPsyAs knowledge base.");
-        scrollToBottom();
-        return;
-    }
-
     const typingIndicator = showTypingIndicator();
 
     try {
-        const botResponse = await fetchGeminiResponse(matchedItem, userText);
+        let promptToSend = "";
+
+        // 1. Check for casual small talk
+        if (isSmallTalk(userText)) {
+            promptToSend = `The student is making general small talk or greeting: "${userText}".
+Reply in a warm, polite, and conversational manner as the EdPsyAs AI assistant. Briefly offer to help with Educational Psychology topics. Keep it under 2 sentences.`;
+        } 
+        else {
+            // 2. Search knowledge base for academic topics
+            const matchedItem = searchKnowledge(userText);
+
+            if (!matchedItem) {
+                typingIndicator.remove();
+                renderBotMessage("Sorry, I couldn't find that topic in the EdPsyAs knowledge base. Please try asking about educational psychology topics!");
+                scrollToBottom();
+                return;
+            }
+
+            // 3. Format structured RAG prompt
+            promptToSend = `Knowledge Base
+
+Title:
+${matchedItem.title}
+
+Content:
+${matchedItem.content}
+
+Student Question:
+${userText}
+
+Rules:
+1. Answer ONLY using the above content.
+2. Never use outside knowledge.
+3. Keep the response concise, clear, and easy to read (under 150 words).
+4. Format key takeaways cleanly using clear bullet points.
+5. Provide the source link at the end: ${matchedItem.url || "N/A"}`;
+        }
+
+        // Call Worker
+        const botResponse = await fetchGeminiResponse(promptToSend);
         typingIndicator.remove();
         renderBotMessage(botResponse);
+
     } catch (error) {
         typingIndicator.remove();
         renderBotMessage("⚠️ " + error.message);
@@ -160,27 +197,9 @@ async function sendMessage() {
 }
 
 /**
- * Formats payload with context/rules and calls Cloudflare Worker
+ * Sends request to Cloudflare Worker
  */
-async function fetchGeminiResponse(matchedItem, userPrompt) {
-
-    const formattedPrompt = `Knowledge Base
-
-Title:
-${matchedItem.title}
-
-Content:
-${matchedItem.content}
-
-Student Question:
-${userPrompt}
-
-Rules:
-1. Answer ONLY using the above content.
-2. Never use outside knowledge.
-3. Keep the response concise, clear, and easy to read (under 150 words).
-4. Format key takeaways cleanly using clear bullet points.
-5. Provide the source link at the end: ${matchedItem.url || "N/A"}`;
+async function fetchGeminiResponse(formattedPrompt) {
 
     const response = await fetch(WORKER_URL, {
         method: "POST",
