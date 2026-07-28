@@ -61,19 +61,17 @@ async function loadKnowledge() {
 }
 
 /**
- * Checks if the user message is casual greeting or small talk
+ * Checks if the user message is casual greeting or small talk using Regex
  */
 function isSmallTalk(query) {
-    const clean = query.toLowerCase().trim().replace(/[^\w\s]/g, "");
+    if (!query) return false;
     
-    const greetings = [
-        "hi", "hello", "hey", "greetings", "good morning", "good afternoon", 
-        "good evening", "howdy", "sup", "yo", "help", "who are you", 
-        "what can you do", "thanks", "thank you", "bye", "goodbye", "ok", "okay"
-    ];
+    const clean = query.toLowerCase().trim().replace(/[^\w\s]/g, "");
 
-    // Returns true if exact phrase matches greeting list OR if query is very short (1-3 chars)
-    return greetings.includes(clean) || (clean.length > 0 && clean.length <= 3);
+    // Regex pattern matching common greetings and small talk words
+    const greetingPattern = /^(hi+|hello+|hey+|greetings|good\s*(morning|afternoon|evening)|howdy|sup|yo|help|who\s*are\s*you|what\s*can\s*you\s*do|thanks|thank\s*you|bye|goodbye|ok|okay)$/i;
+
+    return greetingPattern.test(clean) || (clean.length > 0 && clean.length <= 3);
 }
 
 /**
@@ -150,8 +148,12 @@ async function sendMessage() {
 
         // STEP 1: Check for small talk / greetings FIRST
         if (isSmallTalk(userText)) {
-            promptToSend = `The student is making general small talk or greeting: "${userText}".
-Reply in a warm, polite, and conversational manner as the EdPsyAs AI assistant. Briefly offer to help with Educational Psychology topics. Keep it under 2 sentences.`;
+            promptToSend = `The user said: "${userText}".
+Instructions for AI:
+1. Respond with a warm, polite, and brief greeting as the EdPsyAs Assistant.
+2. Ask how you can help them with Educational Psychology today.
+3. DO NOT summarize any educational psychology topics or provide academic definitions unless specifically asked.
+4. Keep the response under 2 sentences.`;
         } 
         else {
             // STEP 2: Academic topics check knowledge base
@@ -278,7 +280,7 @@ function renderBotMessage(text) {
 }
 
 /**
- * Thinking Bubble (Fixed Avatar Element Bug)
+ * Thinking Bubble
  */
 function showTypingIndicator() {
     const chatWindow = document.getElementById('chatWindow');
