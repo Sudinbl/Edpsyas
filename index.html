@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot</title>
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="chat-container">
+        <!-- Header -->
+        <div class="chat-header">
+            <div class="header-avatar"></div>
+            <span>AI Support Assistant</span>
+        </div>
+
+        <!-- Chat window -->
+        <div class="chat-window" id="chatWindow">
+            <div class="message-wrapper bot-wrapper">
+                <div class="bot-avatar"></div>
+                <div class="message bot-message">
+                    Hello! How can I help you today?
+                </div>
+            </div>
+        </div>
+
+        <!-- Input controls -->
+        <div class="input-area">
+            <input type="text" id="userInput" placeholder="Type a message..." />
+            <button type="button">Send</button>
+        </div>
+    </div>
+
+    <!-- Link JS -->
+    <script src="script.js"></script>
+</body>
+</html>

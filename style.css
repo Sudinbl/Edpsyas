@@ -1,0 +1,199 @@
+/* =========================================================
+   CYBER-AI CHATBOT STYLESHEET (style.css)
+   Feature: Spectacled Sharp-Jawed AI Avatar
+   ========================================================= */
+
+/* Import High-Tech Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background: #080C14; /* Deep space dark background */
+    background-image: 
+        radial-gradient(circle at 15% 15%, rgba(0, 242, 254, 0.15) 0%, transparent 45%),
+        radial-gradient(circle at 85% 85%, rgba(111, 0, 255, 0.12) 0%, transparent 45%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #F1F5F9;
+}
+
+/* Main Outer Shell */
+.chat-container {
+    width: 420px;
+    height: 650px;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 242, 254, 0.25);
+    border-radius: 24px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6),
+                0 0 40px rgba(0, 242, 254, 0.15);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Header with Glow & Title */
+.chat-header {
+    background: linear-gradient(180deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.9) 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-weight: 700;
+    font-size: 16px;
+    color: #00F2FE;
+    text-shadow: 0 0 12px rgba(0, 242, 254, 0.4);
+}
+
+/* Header Avatar Circle */
+.header-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #00F2FE;
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
+    /* Detailed Spectacled Triangular Jaw Vector Silhouette */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M20,35 L50,88 L80,35 L70,20 L30,20 Z' fill='%230F172A' stroke='%2300F2FE' stroke-width='2.5'/%3E%3Cpolygon points='30,22 70,22 65,35 35,35' fill='%231E293B'/%3E%3Crect x='28' y='38' width='20' height='14' rx='2' fill='rgba(0,242,254,0.1)' stroke='%2300F2FE' stroke-width='2.5'/%3E%3Crect x='52' y='38' width='20' height='14' rx='2' fill='rgba(0,242,254,0.1)' stroke='%2300F2FE' stroke-width='2.5'/%3E%3Cline x1='48' y1='44' x2='52' y2='44' stroke='%2300F2FE' stroke-width='2.5'/%3E%3Cpath d='M42,65 Q50,72 58,65' fill='none' stroke='%2300F2FE' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-size: cover;
+    background-position: center;
+}
+
+/* Chat Screen */
+.chat-window {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.chat-window::-webkit-scrollbar {
+    width: 5px;
+}
+.chat-window::-webkit-scrollbar-thumb {
+    background: rgba(0, 242, 254, 0.2);
+    border-radius: 10px;
+}
+
+/* Message Wrapper Layout */
+.message-wrapper {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+}
+
+.user-wrapper {
+    justify-content: flex-end;
+}
+
+.bot-wrapper {
+    justify-content: flex-start;
+}
+
+/* AI Character Avatar Next to AI Messages */
+.bot-avatar {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    border-radius: 50%;
+    background-color: #0F172A;
+    border: 2px solid #00F2FE;
+    /* Spectacled Sharp Triangular Jaw Character SVG */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M20,35 L50,88 L80,35 L70,20 L30,20 Z' fill='%230F172A' stroke='%2300F2FE' stroke-width='2.5'/%3E%3Cpolygon points='30,22 70,22 65,35 35,35' fill='%231E293B'/%3E%3Crect x='28' y='38' width='20' height='14' rx='2' fill='rgba(0,242,254,0.1)' stroke='%2300F2FE' stroke-width='2.5'/%3E%3Crect x='52' y='38' width='20' height='14' rx='2' fill='rgba(0,242,254,0.1)' stroke='%2300F2FE' stroke-width='2.5'/%3E%3Cline x1='48' y1='44' x2='52' y2='44' stroke='%2300F2FE' stroke-width='2.5'/%3E%3Cpath d='M42,65 Q50,72 58,65' fill='none' stroke='%2300F2FE' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-size: cover;
+    box-shadow: 0 0 12px rgba(0, 242, 254, 0.35);
+}
+
+/* Chat Bubbles Style */
+.message {
+    max-width: 72%;
+    padding: 12px 18px;
+    font-size: 14px;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+/* User Message Bubble */
+.user-message {
+    background: linear-gradient(135deg, #00F2FE 0%, #4FACFE 100%);
+    color: #020617;
+    font-weight: 600;
+    border-radius: 20px 20px 4px 20px;
+    box-shadow: 0 4px 20px rgba(0, 242, 254, 0.25);
+}
+
+/* AI Bot Message Bubble */
+.bot-message {
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(0, 242, 254, 0.2);
+    color: #E2E8F0;
+    border-radius: 20px 20px 20px 4px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Text Input & Controls Area */
+.input-area {
+    display: flex;
+    padding: 16px;
+    background: rgba(15, 23, 42, 0.95);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    gap: 10px;
+}
+
+/* Input Text Field */
+.input-area input {
+    flex: 1;
+    padding: 12px 18px;
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid rgba(0, 242, 254, 0.2);
+    border-radius: 30px;
+    color: #FFFFFF;
+    outline: none;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.input-area input::placeholder {
+    color: #64748B;
+}
+
+.input-area input:focus {
+    border-color: #00F2FE;
+    background: rgba(30, 41, 59, 0.9);
+    box-shadow: 0 0 12px rgba(0, 242, 254, 0.3);
+}
+
+/* Glowing Send Button */
+.input-area button {
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #00F2FE 0%, #00C6FF 100%);
+    color: #020617;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 18px rgba(0, 242, 254, 0.4);
+}
+
+.input-area button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 28px rgba(0, 242, 254, 0.7);
+}
+
+.input-area button:active {
+    transform: translateY(1px);
+}
