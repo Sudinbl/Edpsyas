@@ -1,6 +1,6 @@
 /* =========================================================
    CHATBOT INTERACTION SCRIPT (script.js)
-   Supports Small Talk + Knowledge Base (RAG)
+   Supports Small Talk + Knowledge Base (RAG) + Popup Widget
    ========================================================= */
 
 // Your Cloudflare Worker URL
@@ -19,6 +19,27 @@ function initChatbot() {
     const inputField = document.getElementById('userInput');
     const sendButton = document.getElementById('sendBtn') || document.querySelector('.input-area button');
 
+    // Widget Toggle Elements
+    const widgetBtn = document.getElementById('chat-widget-button');
+    const widgetContainer = document.getElementById('chat-widget-container');
+    const closeBtn = document.getElementById('close-chat-btn');
+
+    // 1. Toggle Chat Widget Popup Open/Close
+    if (widgetBtn && widgetContainer) {
+        widgetBtn.addEventListener('click', () => {
+            widgetContainer.classList.toggle('chat-widget-hidden');
+            widgetContainer.classList.toggle('chat-widget-visible');
+        });
+    }
+
+    if (closeBtn && widgetContainer) {
+        closeBtn.addEventListener('click', () => {
+            widgetContainer.classList.add('chat-widget-hidden');
+            widgetContainer.classList.remove('chat-widget-visible');
+        });
+    }
+
+    // 2. Chat Input Listeners
     if (inputField) {
         inputField.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
