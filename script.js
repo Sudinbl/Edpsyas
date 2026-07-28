@@ -26,23 +26,31 @@ function initChatbot() {
 
     // 1. Toggle Chat Widget Popup Open/Close
     if (widgetBtn && widgetContainer) {
-        widgetBtn.addEventListener('click', (event) => {
-            event.preventDefault();
-            console.log("Widget button clicked!");
-            widgetContainer.classList.toggle('chat-widget-hidden');
-            widgetContainer.classList.toggle('chat-widget-visible');
-        });
+        widgetBtn.onclick = function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            console.log("Widget icon clicked!");
+
+            if (widgetContainer.classList.contains('chat-widget-hidden')) {
+                widgetContainer.classList.remove('chat-widget-hidden');
+                widgetContainer.classList.add('chat-widget-visible');
+            } else {
+                widgetContainer.classList.add('chat-widget-hidden');
+                widgetContainer.classList.remove('chat-widget-visible');
+            }
+        };
         console.log("Widget toggle listener attached successfully.");
     } else {
         console.error("Widget button or container element not found in DOM!");
     }
 
     if (closeBtn && widgetContainer) {
-        closeBtn.addEventListener('click', (event) => {
-            event.preventDefault();
+        closeBtn.onclick = function(e) {
+            e.stopPropagation();
+            e.preventDefault();
             widgetContainer.classList.add('chat-widget-hidden');
             widgetContainer.classList.remove('chat-widget-visible');
-        });
+        };
     }
 
     // 2. Chat Input Listeners
@@ -56,10 +64,10 @@ function initChatbot() {
     }
 
     if (sendButton) {
-        sendButton.addEventListener('click', (event) => {
-            event.preventDefault();
+        sendButton.onclick = function(e) {
+            e.preventDefault();
             sendMessage();
-        });
+        };
         console.log("Send button listener attached successfully.");
     }
 }
