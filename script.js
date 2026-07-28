@@ -69,10 +69,11 @@ function isSmallTalk(query) {
     const greetings = [
         "hi", "hello", "hey", "greetings", "good morning", "good afternoon", 
         "good evening", "howdy", "sup", "yo", "help", "who are you", 
-        "what can you do", "thanks", "thank you", "bye", "goodbye"
+        "what can you do", "thanks", "thank you", "bye", "goodbye", "ok", "okay"
     ];
 
-    return greetings.includes(clean) || clean.length <= 2;
+    // Check if exact phrase matches list OR if the message is extremely short (1-3 chars)
+    return greetings.includes(clean) || (clean.length > 0 && clean.length <= 3);
 }
 
 /**
@@ -147,13 +148,20 @@ async function sendMessage() {
     try {
         let promptToSend = "";
 
-        // 1. Check for casual small talk
+        // STEP 1: FIRST Check if input is casual small talk (e.g. "hello", "thank you")
         if (isSmallTalk(userText)) {
             promptToSend = `The student is making general small talk or greeting: "${userText}".
 Reply in a warm, polite, and conversational manner as the EdPsyAs AI assistant. Briefly offer to help with Educational Psychology topics. Keep it under 2 sentences.`;
         } 
         else {
-            // 2. Search knowledge base for academic topics
+            // STEP 2: Only search knowledge base if it's NOT small talk
+            if (!knowledge || knowledge.length === 0) {
+                typingIndicator.remove();
+                renderBotMessage("⚠️ Knowledge base is still loading or could not be found. Please refresh the page.");
+                scrollToBottom();
+                return;
+            }
+
             const matchedItem = searchKnowledge(userText);
 
             if (!matchedItem) {
@@ -163,7 +171,7 @@ Reply in a warm, polite, and conversational manner as the EdPsyAs AI assistant. 
                 return;
             }
 
-            // 3. Format structured RAG prompt
+            // STEP 3: Format structured RAG prompt for academic questions
             promptToSend = `Knowledge Base
 
 Title:
@@ -183,7 +191,7 @@ Rules:
 5. Provide the source link at the end: ${matchedItem.url || "N/A"}`;
         }
 
-        // Call Worker
+        // Call Cloudflare Worker
         const botResponse = await fetchGeminiResponse(promptToSend);
         typingIndicator.remove();
         renderBotMessage(botResponse);
@@ -277,8 +285,7 @@ function showTypingIndicator() {
     const wrapper = document.createElement('div');
     wrapper.className = 'message-wrapper bot-wrapper typing-wrapper';
 
-    const avatar = document.createElement('div');
-    avatar.className = 'bot-avatar';
+    const avatar = document.className = 'bot-avatar';
 
     const bubble = document.createElement('div');
     bubble.className = 'message bot-message';
