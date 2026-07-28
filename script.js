@@ -1,6 +1,5 @@
 /* =========================================================
    CHATBOT INTERACTION SCRIPT (script.js)
-   Uses Cloudflare Worker with local Knowledge Base (RAG)
    ========================================================= */
 
 // Your Cloudflare Worker URL
@@ -9,11 +8,11 @@ const WORKER_URL = "https://edpsyaschatbot.sdbl-sdb-com.workers.dev/";
 // Global variable to store loaded knowledge entries
 let knowledge = [];
 
-// 1. Initialize DOM events & Load Knowledge Base properly
-document.addEventListener('DOMContentLoaded', async () => {
+// 1. Attach button events IMMEDIATELY on page load
+document.addEventListener('DOMContentLoaded', () => {
     
-    // Await knowledge base loading before binding actions
-    await loadKnowledge();
+    // Start loading knowledge base in background
+    loadKnowledge();
 
     const inputField = document.getElementById('userInput');
     const sendButton = document.querySelector('.input-area button');
@@ -21,19 +20,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (inputField) {
         inputField.addEventListener('keypress', (event) => {
             if (event.key === 'Enter') {
+                event.preventDefault();
                 sendMessage();
             }
         });
     }
 
     if (sendButton) {
-        sendButton.addEventListener('click', sendMessage);
+        sendButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            sendMessage();
+        });
     }
 
 });
 
 /**
- * Loads the local knowledge.json file
+ * Loads the local knowledge.json file asynchronously
  */
 async function loadKnowledge() {
     try {
@@ -65,7 +68,6 @@ function searchKnowledge(query) {
         "tell", "me", "about", "who", "why", "how", "does", "can", "you", "give"
     ];
 
-    // Filter out stop words (allow words with length >= 2)
     const searchTerms = words.filter(word => word.length >= 2 && !stopWords.includes(word));
 
     if (searchTerms.length === 0) return null;
@@ -87,7 +89,6 @@ function searchKnowledge(query) {
         }
 
         searchTerms.forEach(term => {
-            // Priority scoring: Title (+5), Keywords (+3), Content (+1)
             if (titleText.includes(term)) score += 5;
             if (keywordText.includes(term)) score += 3;
             if (contentText.includes(term)) score += 1;
@@ -114,11 +115,19 @@ async function sendMessage() {
 
     if (userText === "") return;
 
+    // Render user message bubble right away
     renderUserMessage(userText);
     inputField.value = "";
     scrollToBottom();
 
-    // Search knowledge base using keyword scoring algorithm
+    // Check if knowledge base is populated
+    if (!knowledge || knowledge.length === 0) {
+        renderBotMessage("⚠️ Knowledge base is still loading or could not be found. Please refresh the page.");
+        scrollToBottom();
+        return;
+    }
+
+    // Search knowledge base
     const matchedItem = searchKnowledge(userText);
 
     if (!matchedItem) {
@@ -130,17 +139,12 @@ async function sendMessage() {
     const typingIndicator = showTypingIndicator();
 
     try {
-        // Pass structured prompt context to Gemini
         const botResponse = await fetchGeminiResponse(matchedItem, userText);
-
         typingIndicator.remove();
         renderBotMessage(botResponse);
-
     } catch (error) {
-
         typingIndicator.remove();
         renderBotMessage("⚠️ " + error.message);
-
     }
 
     scrollToBottom();
@@ -233,7 +237,6 @@ function renderBotMessage(text) {
     const messageBubble = document.createElement('div');
     messageBubble.className = 'message bot-message';
 
-    // Renders Markdown headings and bullet points cleanly if Marked library is available
     if (typeof marked !== 'undefined') {
         messageBubble.innerHTML = marked.parse(text);
     } else {
