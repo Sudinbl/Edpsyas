@@ -9,22 +9,26 @@ const WORKER_URL = "https://edpsyaschatbot.sdbl-sdb-com.workers.dev/";
 // Global variable to store loaded knowledge entries
 let knowledge = [];
 
-// 1. Initialize DOM events & Load Knowledge Base
-document.addEventListener('DOMContentLoaded', () => {
+// 1. Initialize DOM events & Load Knowledge Base properly
+document.addEventListener('DOMContentLoaded', async () => {
     
-    // Load knowledge base
-    loadKnowledge();
+    // Await knowledge base loading before binding actions
+    await loadKnowledge();
 
     const inputField = document.getElementById('userInput');
     const sendButton = document.querySelector('.input-area button');
 
-    inputField.addEventListener('keypress', (event) => {
-        if (event.key === 'Enter') {
-            sendMessage();
-        }
-    });
+    if (inputField) {
+        inputField.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    }
 
-    sendButton.addEventListener('click', sendMessage);
+    if (sendButton) {
+        sendButton.addEventListener('click', sendMessage);
+    }
 
 });
 
@@ -51,7 +55,9 @@ function searchKnowledge(query) {
     if (!knowledge || knowledge.length === 0) return null;
 
     // Clean query
-    const cleanQuery = query.toLowerCase().replace(/[^\w\s]/g, "");
+    const cleanQuery = (query || "").toLowerCase().replace(/[^\w\s]/g, "").trim();
+    if (!cleanQuery) return null;
+
     const words = cleanQuery.split(/\s+/);
 
     const stopWords = [
@@ -81,18 +87,10 @@ function searchKnowledge(query) {
         }
 
         searchTerms.forEach(term => {
-            // Give highest priority if the word is in Title (+5)
-            if (titleText.includes(term)) {
-                score += 5;
-            }
-            // High priority if in Keywords array (+3)
-            if (keywordText.includes(term)) {
-                score += 3;
-            }
-            // Standard priority if in Content (+1)
-            if (contentText.includes(term)) {
-                score += 1;
-            }
+            // Priority scoring: Title (+5), Keywords (+3), Content (+1)
+            if (titleText.includes(term)) score += 5;
+            if (keywordText.includes(term)) score += 3;
+            if (contentText.includes(term)) score += 1;
         });
 
         if (score > highestScore) {
@@ -101,7 +99,6 @@ function searchKnowledge(query) {
         }
     }
 
-    // Require at least a match score of 1
     return highestScore > 0 ? bestMatch : null;
 }
 
@@ -111,6 +108,8 @@ function searchKnowledge(query) {
 async function sendMessage() {
 
     const inputField = document.getElementById('userInput');
+    if (!inputField) return;
+
     const userText = inputField.value.trim();
 
     if (userText === "") return;
@@ -153,7 +152,6 @@ async function sendMessage() {
  */
 async function fetchGeminiResponse(matchedItem, userPrompt) {
 
-    // Format prompt context strictly using requested rules
     const formattedPrompt = `Knowledge Base
 
 Title:
@@ -285,6 +283,8 @@ function showTypingIndicator() {
 function scrollToBottom() {
 
     const chatWindow = document.getElementById('chatWindow');
-    chatWindow.scrollTop = chatWindow.scrollHeight;
+    if (chatWindow) {
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
 
 }
