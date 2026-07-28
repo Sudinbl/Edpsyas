@@ -3,39 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Chatbot</title>
-    <!-- Link CSS -->
+    <title>AI Chatbot Widget</title>
+    <!-- FontAwesome for Chat Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="chat-container">
-        <!-- Header -->
-        <div class="chat-header">
-            <div class="header-avatar"></div>
-            <span>AI Support Assistant</span>
-        </div>
+    <!-- Floating Chat Trigger Button -->
+    <button id="chat-widget-button" aria-label="Open Chat">
+        <i class="fa-solid fa-comments"></i>
+    </button>
 
-        <!-- Chat window -->
-        <div class="chat-window" id="chatWindow">
-            <div class="message-wrapper bot-wrapper">
-                <div class="bot-avatar"></div>
-                <div class="message bot-message">
-                    Hello! How can I help you today?
+    <!-- Floating Chat Container (Hidden by Default) -->
+    <div id="chat-widget-container" class="chat-widget-hidden">
+        <div class="chat-container">
+            <!-- Header with Close Button -->
+            <div class="chat-header">
+                <div class="header-avatar"></div>
+                <span>AI Support Assistant</span>
+                <button id="close-chat-btn" aria-label="Close Chat">&times;</button>
+            </div>
+
+            <!-- Chat window -->
+            <div class="chat-window" id="chatWindow">
+                <div class="message-wrapper bot-wrapper">
+                    <div class="bot-avatar"></div>
+                    <div class="message bot-message">
+                        Hello! How can I help you today?
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Input controls -->
-        <div class="input-area">
-            <input type="text" id="userInput" placeholder="Type a message..." />
-            <button type="button" id="sendBtn">Send</button>
+            <!-- Input controls -->
+            <div class="input-area">
+                <input type="text" id="userInput" placeholder="Type a message..." />
+                <button type="button" id="sendBtn">Send</button>
+            </div>
         </div>
     </div>
 
     <!-- Marked Library for Markdown rendering -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <!-- Link JS -->
     <script src="script.js"></script>
 </body>
 </html>
