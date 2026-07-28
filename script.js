@@ -26,14 +26,20 @@ function initChatbot() {
 
     // 1. Toggle Chat Widget Popup Open/Close
     if (widgetBtn && widgetContainer) {
-        widgetBtn.addEventListener('click', () => {
+        widgetBtn.addEventListener('click', (event) => {
+            event.preventDefault();
+            console.log("Widget button clicked!");
             widgetContainer.classList.toggle('chat-widget-hidden');
             widgetContainer.classList.toggle('chat-widget-visible');
         });
+        console.log("Widget toggle listener attached successfully.");
+    } else {
+        console.error("Widget button or container element not found in DOM!");
     }
 
     if (closeBtn && widgetContainer) {
-        closeBtn.addEventListener('click', () => {
+        closeBtn.addEventListener('click', (event) => {
+            event.preventDefault();
             widgetContainer.classList.add('chat-widget-hidden');
             widgetContainer.classList.remove('chat-widget-visible');
         });
