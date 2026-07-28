@@ -8,17 +8,18 @@ const WORKER_URL = "https://edpsyaschatbot.sdbl-sdb-com.workers.dev/";
 // Global variable to store loaded knowledge entries
 let knowledge = [];
 
-// 1. Attach button events IMMEDIATELY on page load
-document.addEventListener('DOMContentLoaded', () => {
+// Helper function to bind listeners reliably
+function initChatbot() {
+    console.log("Initializing Chatbot listeners...");
     
-    // Start loading knowledge base in background
+    // Start loading knowledge base
     loadKnowledge();
 
     const inputField = document.getElementById('userInput');
-    const sendButton = document.querySelector('.input-area button');
+    const sendButton = document.getElementById('sendBtn') || document.querySelector('.input-area button');
 
     if (inputField) {
-        inputField.addEventListener('keypress', (event) => {
+        inputField.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
                 event.preventDefault();
                 sendMessage();
@@ -31,9 +32,18 @@ document.addEventListener('DOMContentLoaded', () => {
             event.preventDefault();
             sendMessage();
         });
+        console.log("Send button listener attached successfully.");
+    } else {
+        console.error("Send button element not found!");
     }
+}
 
-});
+// Support for both immediate load and DOMContentLoaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initChatbot);
+} else {
+    initChatbot();
+}
 
 /**
  * Loads the local knowledge.json file asynchronously
@@ -57,7 +67,6 @@ async function loadKnowledge() {
 function searchKnowledge(query) {
     if (!knowledge || knowledge.length === 0) return null;
 
-    // Clean query
     const cleanQuery = (query || "").toLowerCase().replace(/[^\w\s]/g, "").trim();
     if (!cleanQuery) return null;
 
@@ -107,20 +116,20 @@ function searchKnowledge(query) {
  * Sends the user message with Knowledge Base verification
  */
 async function sendMessage() {
+    console.log("sendMessage triggered!");
 
     const inputField = document.getElementById('userInput');
     if (!inputField) return;
 
     const userText = inputField.value.trim();
-
     if (userText === "") return;
 
-    // Render user message bubble right away
+    // Render user bubble immediately
     renderUserMessage(userText);
     inputField.value = "";
     scrollToBottom();
 
-    // Check if knowledge base is populated
+    // Verify knowledge base availability
     if (!knowledge || knowledge.length === 0) {
         renderBotMessage("⚠️ Knowledge base is still loading or could not be found. Please refresh the page.");
         scrollToBottom();
@@ -148,7 +157,6 @@ async function sendMessage() {
     }
 
     scrollToBottom();
-
 }
 
 /**
@@ -190,7 +198,6 @@ Rules:
     }
 
     const data = await response.json();
-
     const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
 
     if (!text) {
@@ -199,16 +206,13 @@ Rules:
     }
 
     return text;
-
 }
 
 /**
  * User Bubble
  */
 function renderUserMessage(text) {
-
     const chatWindow = document.getElementById('chatWindow');
-
     const wrapper = document.createElement('div');
     wrapper.className = 'message-wrapper user-wrapper';
 
@@ -218,16 +222,13 @@ function renderUserMessage(text) {
 
     wrapper.appendChild(messageBubble);
     chatWindow.appendChild(wrapper);
-
 }
 
 /**
  * AI Bubble (Parses Markdown into rendered HTML)
  */
 function renderBotMessage(text) {
-
     const chatWindow = document.getElementById('chatWindow');
-
     const wrapper = document.createElement('div');
     wrapper.className = 'message-wrapper bot-wrapper';
 
@@ -247,16 +248,13 @@ function renderBotMessage(text) {
     wrapper.appendChild(messageBubble);
 
     chatWindow.appendChild(wrapper);
-
 }
 
 /**
  * Thinking Bubble
  */
 function showTypingIndicator() {
-
     const chatWindow = document.getElementById('chatWindow');
-
     const wrapper = document.createElement('div');
     wrapper.className = 'message-wrapper bot-wrapper typing-wrapper';
 
@@ -275,19 +273,15 @@ function showTypingIndicator() {
     chatWindow.appendChild(wrapper);
 
     scrollToBottom();
-
     return wrapper;
-
 }
 
 /**
  * Scroll Utility
  */
 function scrollToBottom() {
-
     const chatWindow = document.getElementById('chatWindow');
     if (chatWindow) {
         chatWindow.scrollTop = chatWindow.scrollHeight;
     }
-
 }
