@@ -72,7 +72,7 @@ function isSmallTalk(query) {
         "what can you do", "thanks", "thank you", "bye", "goodbye", "ok", "okay"
     ];
 
-    // Check if exact phrase matches list OR if the message is extremely short (1-3 chars)
+    // Returns true if exact phrase matches greeting list OR if query is very short (1-3 chars)
     return greetings.includes(clean) || (clean.length > 0 && clean.length <= 3);
 }
 
@@ -148,13 +148,13 @@ async function sendMessage() {
     try {
         let promptToSend = "";
 
-        // STEP 1: FIRST Check if input is casual small talk (e.g. "hello", "thank you")
+        // STEP 1: Check for small talk / greetings FIRST
         if (isSmallTalk(userText)) {
             promptToSend = `The student is making general small talk or greeting: "${userText}".
 Reply in a warm, polite, and conversational manner as the EdPsyAs AI assistant. Briefly offer to help with Educational Psychology topics. Keep it under 2 sentences.`;
         } 
         else {
-            // STEP 2: Only search knowledge base if it's NOT small talk
+            // STEP 2: Academic topics check knowledge base
             if (!knowledge || knowledge.length === 0) {
                 typingIndicator.remove();
                 renderBotMessage("⚠️ Knowledge base is still loading or could not be found. Please refresh the page.");
@@ -278,14 +278,15 @@ function renderBotMessage(text) {
 }
 
 /**
- * Thinking Bubble
+ * Thinking Bubble (Fixed Avatar Element Bug)
  */
 function showTypingIndicator() {
     const chatWindow = document.getElementById('chatWindow');
     const wrapper = document.createElement('div');
     wrapper.className = 'message-wrapper bot-wrapper typing-wrapper';
 
-    const avatar = document.className = 'bot-avatar';
+    const avatar = document.createElement('div');
+    avatar.className = 'bot-avatar';
 
     const bubble = document.createElement('div');
     bubble.className = 'message bot-message';
