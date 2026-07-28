@@ -14,7 +14,7 @@
 }
 
 body {
-    background: #080C14; /* Deep space dark background */
+    background: #080C14;
     background-image: 
         radial-gradient(circle at 15% 15%, rgba(0, 242, 254, 0.15) 0%, transparent 45%),
         radial-gradient(circle at 85% 85%, rgba(111, 0, 255, 0.12) 0%, transparent 45%);
@@ -152,7 +152,6 @@ body {
     border-radius: 50%;
     border: 2px solid #00F2FE;
     box-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
-    /* Detailed Spectacled Triangular Jaw Vector Silhouette */
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M20,35 L50,88 L80,35 L70,20 L30,20 Z' fill='%230F172A' stroke='%2300F2FE' stroke-width='2.5'/%3E%3Cpolygon points='30,22 70,22 65,35 35,35' fill='%231E293B'/%3E%3Crect x='28' y='38' width='20' height='14' rx='2' fill='rgba(0,242,254,0.1)' stroke='%2300F2FE' stroke-width='2.5'/%3E%3Crect x='52' y='38' width='20' height='14' rx='2' fill='rgba(0,242,254,0.1)' stroke='%2300F2FE' stroke-width='2.5'/%3E%3Cline x1='48' y1='44' x2='52' y2='44' stroke='%2300F2FE' stroke-width='2.5'/%3E%3Cpath d='M42,65 Q50,72 58,65' fill='none' stroke='%2300F2FE' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
     background-size: cover;
     background-position: center;
@@ -171,6 +170,7 @@ body {
 .chat-window::-webkit-scrollbar {
     width: 5px;
 }
+
 .chat-window::-webkit-scrollbar-thumb {
     background: rgba(0, 242, 254, 0.2);
     border-radius: 10px;
@@ -199,7 +199,6 @@ body {
     border-radius: 50%;
     background-color: #0F172A;
     border: 2px solid #00F2FE;
-    /* Spectacled Sharp Triangular Jaw Character SVG */
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M20,35 L50,88 L80,35 L70,20 L30,20 Z' fill='%230F172A' stroke='%2300F2FE' stroke-width='2.5'/%3E%3Cpolygon points='30,22 70,22 65,35 35,35' fill='%231E293B'/%3E%3Crect x='28' y='38' width='20' height='14' rx='2' fill='rgba(0,242,254,0.1)' stroke='%2300F2FE' stroke-width='2.5'/%3E%3Crect x='52' y='38' width='20' height='14' rx='2' fill='rgba(0,242,254,0.1)' stroke='%2300F2FE' stroke-width='2.5'/%3E%3Cline x1='48' y1='44' x2='52' y2='44' stroke='%2300F2FE' stroke-width='2.5'/%3E%3Cpath d='M42,65 Q50,72 58,65' fill='none' stroke='%2300F2FE' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
     background-size: cover;
     box-shadow: 0 0 12px rgba(0, 242, 254, 0.35);
