@@ -45,30 +45,60 @@ async function loadKnowledge() {
 }
 
 /**
- * 2. Search knowledge.json across title, keywords, and content
+ * 2. Enhanced Keyword-Scoring Knowledge Search
  */
 function searchKnowledge(query) {
+
     if (!knowledge || knowledge.length === 0) return null;
 
-    const lowerQuery = query.toLowerCase();
+    // Convert to lowercase
+    query = query.toLowerCase();
 
-    // Search for a matching item where title, keywords, or content contains query keywords
-    const match = knowledge.find(item => {
-        const titleMatch = item.title && item.title.toLowerCase().includes(lowerQuery);
-        const contentMatch = item.content && item.content.toLowerCase().includes(lowerQuery);
-        
-        // Handle keywords array or string format
-        let keywordMatch = false;
-        if (Array.isArray(item.keywords)) {
-            keywordMatch = item.keywords.some(k => k.toLowerCase().includes(lowerQuery));
-        } else if (typeof item.keywords === 'string') {
-            keywordMatch = item.keywords.toLowerCase().includes(lowerQuery);
+    // Remove punctuation
+    query = query.replace(/[^\w\s]/g, "");
+
+    // Split into words
+    const words = query.split(/\s+/);
+
+    // Ignore common words
+    const stopWords = [
+        "what", "is", "the", "of", "a", "an", "define", "explain",
+        "tell", "me", "about", "who", "why", "how", "does"
+    ];
+
+    const keywords = words.filter(word =>
+        word.length > 2 && !stopWords.includes(word)
+    );
+
+    let bestMatch = null;
+    let highestScore = 0;
+
+    for (const item of knowledge) {
+
+        const searchableText = (
+            (item.title || "") + " " +
+            (Array.isArray(item.keywords)
+                ? item.keywords.join(" ")
+                : item.keywords || "") + " " +
+            (item.content || "")
+        ).toLowerCase();
+
+        let score = 0;
+
+        keywords.forEach(keyword => {
+            if (searchableText.includes(keyword)) {
+                score++;
+            }
+        });
+
+        if (score > highestScore) {
+            highestScore = score;
+            bestMatch = item;
         }
 
-        return titleMatch || keywordMatch || contentMatch;
-    });
+    }
 
-    return match || null;
+    return highestScore > 0 ? bestMatch : null;
 }
 
 /**
@@ -85,7 +115,7 @@ async function sendMessage() {
     inputField.value = "";
     scrollToBottom();
 
-    // 3. Search knowledge base before calling Gemini
+    // 3. Search knowledge base using keyword scoring algorithm
     const matchedItem = searchKnowledge(userText);
 
     if (!matchedItem) {
