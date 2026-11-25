@@ -42,20 +42,75 @@
 
 
   {
-    "title": "Vygotsky",
-    "url": "https://sites.google.com/view/edpsyas/vygotsky",
+    "title": "Stages of development",
+    "url": "https://sites.google.com/view/educational-pschology/educational-psychology/growth-development/stages-of-development?authuser=0",
     "keywords": [
-      "vygotsky",
-      "zpd",
-      "scaffolding"
+      "Prenatal",  
+      "Infancy and toddlerhood",
+      "Early childhood", 
+      "Later childhood", 
+      "Adolescence", 
+      "Adulthood", 
+      "later adulthood",
+      "old age"
+
     ],
-    "content": "Vygotsky emphasized social interaction..."
-  }
-
-
+    "content": 
+   "Stage: Prenatal | Time period: Conception to birth | Characteristics: -\n\nStage: Infancy and toddlerhood | Time period: Birth to 2 years | Characteristics:\nPeriod of rapid growth and development.\nThe infant cries most the time for satisfying hunger and sleeps after it as routine.\nInfant depends mostly on mothers.\nAt initial stages exhibit simple muscular movements and develops coordinated movements.\nAfter attaining motor balance of head, they start to move with lower body.\nChild display self-assertion and demand everything child needed in environment.\nChild focus on gratification of needs and not aware of social norms\n\nStage: Early childhood | Time period: 3 – 7 years | Characteristics:\nAlso called preschool stage\nRefinement of behaviour and social interaction of child take place.\nCognitive abilities and language abilities shows a significant development\nSocially child is cooperative and love learning, playing and growing with others\n\nStage: Later childhood | Time period: 7-12 years | Characteristics:\nMarked by moral, intellectual and social development.\nChild form peer groups and interact more with children of same gender.\nChild began to know about rules and norms and start to obey them\nMotor coordination improves a lot.\n\nStage: Adolescence | Time period: 13- 18 years | Characteristics:\nIt is the transitional stage from childhood to mature individuals.\nThe individuals here are treated neither as child nor adult, but in between them.\nThe stage is marked by major emotional, physical, cognitive and societal changes.\nSexual maturation happens in this stage with desire for opposite sex\nThe stage is marked by increased self-consciousness.\nPeer groups are highly influential in this stage.\nThey gain thinking capabilities logically and abstractly\nStage is characterised by a period of stress and storm\n\nStage: Adulthood | Time period: Age after 18 | Characteristics:\nMature stage of increased responsibilities and roles.\nEarly adulthood Individual focuses on career development, planning for the future and ready to get married.\nIn the later adulthood, individuals take care of family responsibilities, taking care of children, guiding people with their experiences.\nThe final phase, called old age, prepares individual for retirement life. As individuals grow older the concern for health increased due to gradual declination of bodily functions. The individuals prepare for the end of the life period."
+}
+  
 
 
   {
+    "title": "Brain",
+    "url": "https://sites.google.com/view/educational-pschology/educational-psychology/growth-development/brain?authuser=0",
+    "keywords": [
+      "hemispheres",
+      "Cerebral cortex", 
+      "lobes",
+      "frontal lobe", "parietal lobe", "temporal lobe", "occipital lobe", "Brain stem",  
+      "Cerebellum", 
+      "Hippocampus",
+      "Amygdala", 
+      "Corpus callosum", 
+      "Frontal lobe", 
+      "Parietal lobe", 
+      "Temporal lobe",
+      "Occipital lobe", 
+      "Brain imaging techniques", 
+      "CAT scan (Computerized Axial Tomography)",
+      "PET scan (Positron Emission Tomography)", 
+      "EEG (Electroencephalograph)",
+      "ERP (Event Related Potentials)",
+      "fMRI (Functional Magnetic Resonance Imaging)",
+      "NIR -OT  ( Near -infrared  Optical Tomography)"
+
+
+    ],
+    
+  "content": "Brain – structure and function\nFor understanding how learning and behaviour occur in humans, it is important to understand the structure of human body. In relation to educational psychology more attention is given to structures like brain and neurons. These structures support cognition, emotions and actions. They influence on individuals learning, processing experiences and responding to environment, thereby are essential components in teaching and learning.\n\nBrain consists of 80% water along with other fats and protein. Brain consists of two hemispheres right and the left. Cerebral cortex is the largest part of brain covering the cerebrum. Cerebral cortex has 4 parts called lobes as frontal lobe, parietal lobe, temporal lobe and occipital lobe.\n\nParts of brain and Functions:\n- Parts of brain: Brain stem | Functions: Heartrate, breathing, blood pressure, sleeping, wakeful attention\n- Parts of brain: Cerebellum | Functions: Balance and smooth skilled movements\n- Parts of brain: Hippocampus | Functions: Recalling new information and recent experiences\n- Parts of brain: Amygdala | Functions: Emotions and aggression\n- Parts of brain: Corpus callosum | Functions: Connects two hemispheres of brain\n- Parts of brain: Frontal lobe | Functions: Planning, remembering, decision making, thinking creatively, problem solving\n- Parts of brain: Parietal lobe | Functions: Processing sensory information\n- Parts of brain: Temporal lobe | Functions: Hearing and memory\n- Parts of brain: Occipital lobe | Functions: Vision\n\nWhen any damage is caused to right side of brain, it affects the movement of left side of the body and vice versa. Left hemisphere of brain is prominent part in language processing. right hemisphere handles visual spatial information and emotions.\n\nBrain imaging techniques:\n- Name: CAT scan (Computerized Axial Tomography) | Functionality: Provide 3-D images of brain using x ray technology | Limitations: Provide less information about brain activity; Cannot be repeatedly done due to radiation exposure\n- Name: PET scan (Positron Emission Tomography) | Functionality: Shows the brain activities. The radioactive glucose injected is consumed by areas of brain performing varied activities. High activity needs high glucose level and displayed as brighter color on computerized maps | Limitations: Due to radio active injection, it is not feasible for more sessions.\n- Name: EEG (Electroencephalograph) | Functionality: Record electrical activity in brain produced by neural signals. The electrodes attached to scalp display the pattern of the electrical activity | Limitations: Does not provide pictures of the brain. Make available the activity of brain, but fails to tell location of activity\n- Name: ERP (Event Related Potentials) | Functionality: Perform calculations EEG data based on the brain's response to stimulus. | Limitations: Not good at identifying the place where activity is occurring.\n- Name: fMRI (Functional Magnetic Resonance Imaging) | Functionality: Provide the blood flow within the brain associated with activity. It conveys the work needed for certain stimuli. | Limitations: A brief lag is displayed in changes in brain activity and changes in blood flow\n- Name: NIR -OT ( Near -infrared Optical Tomography) | Functionality: Use of optical fibre to pass near infrared light through the brain. The reflected light exposing the blood flow and oxygenation reports the brain activity. | Limitations: The near infrared light can penetrate and show activity within few centimetres of brain."
+
+  }
+
+
+  {
+    "title": "Neurons",
+    "url": "https://sites.google.com/view/educational-pschology/educational-psychology/growth-development/neurons?authuser=0",
+    "keywords": [
+      "Nerve cells", 
+      "Dendrites",
+      "axons",
+      "synapses",
+      "glial cells" 
+
+    ],
+    
+  "content": "Neurons\nNerve cells - Specialized nerve cells transmitting information across brain and to parts of nervous system.\nNeurons are brain’s grey matter as they are grey in colour. One neuron has its information capacity resemble to a computer.\nDendrites and axons are crucial parts of a neuron.\nDendrites are short, branched parts which receive messages and bring them inside the cell body.\nAxon is long, slender part that carries messages from away from body. Axon is embodied with myeline sheaths which accelerates the transmission of messages through it.\nThe tiny spaces between neurons are called synapses.\nSynapses are filled with glial cells which are called as the white matte of the brain, glial cells help in fighting infections, provide myelin coating and control blood flow as well as neuron communication.\nThrough electrical signals the neurons share information and it is carried to each neurons through synapses through neurotransmitters. These synaptic transmissions become stronger by repeated use and weaker by when not in use. Thus the strength of synaptic connections is dynamic.\nThe child during earlier stages are oversupplied with neurons and neurons which are used mostly develop unused neurons are pruned. This pruning is important for cognitive development as it keeps brain more organized and efficient.\n\nBrain development\nBrain development occurs throughout the childhood and adolescence.\nInfants recognize the patterns in their world and languages spoken by the caretakers. Through observation, exploration and acting they form neural connection and learn. At this stage they are self-directed and as a teacher or care taker the best thing we can do is to provide a stimulating, responding and safe environment.\nBrains of young children have more plasticity. In elementary school period parts of the brain supporting memory, perception, emotions grow and become connected.\nDuring adolescence period the limbic system develops earlier supporting emotions, risk taking, novelty characteristics in adolescence.\nAs the prefrontal lobe involving decision making and judgement develops later the limbic system, the adolescents tend to be pleasure seekers and adventures for immediate thrills at early adolescence period and become mature decision makers on their actions and adventures during later stages to become adult.\nAdolescents brain is described as high horse powers with poor steering. By the development of prefrontal lobes at later on make them handling their power effectively.\nCulture also has role in shaping brain plasticity. Children of China retain a visual motor sense of numbers due to their practice in abacus using arithmetic teaching. Brain is ever changing and shaped by contexts and cultures.\n\nMyths about brain:\n- Myths: You use only 10% of brain | Truth: You use all your brain\n- Myths: Some people are more right brained and some others left brained | Truth: It takes both sides to do the things\n- Myths: We can’t change our brain | Truth: Out brain is constantly changing all the time\nSource: Based on Aamodt & Wang (2008); K. W. Fischer (2009); Freeman (2011); OECD (2007).\nAnita Woolfolk & Preeti Kapur. Educational Psychology, 14e (p. 52). Pearson Education. Kindle Edition.\n\nImplication in teaching:\n- Understanding brain functioning help in making aware about cognitive process and then developing educational practices based on it.\n- Notion of education is to using of brain for changing of brain by embracing plasticity for better performance.\n- Learning through multiple ways can tackle the brain’s inherent limitation.\n- Changing the brain takes time, so gradual and consistent practice and compassionate in teaching and reteaching is needed.\n- Learning should be connected with concrete experience so that learner can develop good connections and network. Brain seeks meaningful pattern from existing networks\n- Feedback is necessary to correct the networks to learn\n- Help students to understand that the changing of their own brain requires personal responsibility, effort and learning."
+
+  }
+
+
+    {
     "title": "Vygotsky",
     "url": "https://sites.google.com/view/edpsyas/vygotsky",
     "keywords": [
@@ -65,4 +120,49 @@
     ],
     "content": "Vygotsky emphasized social interaction..."
   }
+
+
+
+    {
+    "title": "Vygotsky",
+    "url": "https://sites.google.com/view/edpsyas/vygotsky",
+    "keywords": [
+      "vygotsky",
+      "zpd",
+      "scaffolding"
+    ],
+    "content": "Vygotsky emphasized social interaction..."
+  }
+
+
+
+    {
+    "title": "Vygotsky",
+    "url": "https://sites.google.com/view/edpsyas/vygotsky",
+    "keywords": [
+      "vygotsky",
+      "zpd",
+      "scaffolding"
+    ],
+    "content": "Vygotsky emphasized social interaction..."
+  }
+
+
+
+    {
+    "title": "Vygotsky",
+    "url": "https://sites.google.com/view/edpsyas/vygotsky",
+    "keywords": [
+      "vygotsky",
+      "zpd",
+      "scaffolding"
+    ],
+    "content": "Vygotsky emphasized social interaction..."
+  }
+
+
+
+
+
+  
 ]
